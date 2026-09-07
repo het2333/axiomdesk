@@ -3,6 +3,7 @@ name = "etheralia-ai-employee"
 version = "0.1.0"
 description = "Independent B2B AI employee runtime"
 readme = "README.md"
+license = { text = "Apache-2.0" }
 requires-python = ">=3.12"
 dependencies = [
   "fastapi>=0.115",

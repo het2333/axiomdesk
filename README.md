@@ -26,3 +26,7 @@ Every endpoint requires `X-Organization-Id`.
 
 The initial channel boundary is an Enterprise WeChat adapter. It translates inbound
 payloads into a domain event and does not perform network I/O.
+
+## License
+
+Apache-2.0. See [LICENSE](LICENSE).
