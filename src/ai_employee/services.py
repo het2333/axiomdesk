@@ -1,5 +1,6 @@
-from ai_employee.contracts import AgentRun, AuditEvent, ConversationEvent
+from ai_employee.contracts import AgentRun, ApprovalDecision, AuditEvent, ConversationEvent
 from ai_employee.repository import InMemoryRepository
+from ai_employee.workflow import AgentWorkflow
 
 
 class RunService:
@@ -17,3 +18,18 @@ class RunService:
                 )
             )
         return run
+
+
+class ApprovalService:
+    def __init__(self, repository: InMemoryRepository, workflow: AgentWorkflow) -> None:
+        self.repository = repository
+        self.workflow = workflow
+
+    def decide(
+        self, organization_id: str, approval_id: str, decision: ApprovalDecision
+    ) -> AgentRun:
+        approval = self.repository.approval_for(organization_id, approval_id)
+        if approval.decision is not None:
+            return self.repository.get_run(approval.run_id)
+        self.repository.record_decision(approval, decision)
+        return self.workflow.resume(approval.run_id, decision)

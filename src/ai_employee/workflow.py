@@ -2,7 +2,7 @@ from typing import TypedDict
 
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.graph import END, START, StateGraph
-from langgraph.types import interrupt
+from langgraph.types import Command, interrupt
 
 from ai_employee.contracts import ActionOutcome, AgentRun, ApprovalDecision, Evidence, RunStatus
 from ai_employee.repository import InMemoryRepository
@@ -31,6 +31,14 @@ class AgentWorkflow:
                 "organization_id": run.organization_id,
                 "message": run.event.message,
             },
+            config={"configurable": {"thread_id": run.thread_id}},
+        )
+        return self.repository.get_run(run.id)
+
+    def resume(self, run_id: str, decision: ApprovalDecision) -> AgentRun:
+        run = self.repository.get_run(run_id)
+        self.graph.invoke(
+            Command(resume=decision.value),
             config={"configurable": {"thread_id": run.thread_id}},
         )
         return self.repository.get_run(run.id)

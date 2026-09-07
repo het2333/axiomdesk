@@ -2,6 +2,7 @@ from uuid import uuid4
 
 from ai_employee.contracts import (
     AgentRun,
+    ApprovalDecision,
     ApprovalRequest,
     AuditEvent,
     ConversationEvent,
@@ -66,6 +67,16 @@ class InMemoryRepository:
 
     def approvals_for_run(self, run_id: str) -> list[ApprovalRequest]:
         return [approval for approval in self._approvals_by_key.values() if approval.run_id == run_id]
+
+    def approval_for(self, organization_id: str, approval_id: str) -> ApprovalRequest:
+        for approval in self._approvals_by_key.values():
+            if approval.id == approval_id and approval.organization_id == organization_id:
+                return approval
+        raise KeyError(approval_id)
+
+    def record_decision(self, approval: ApprovalRequest, decision: ApprovalDecision) -> ApprovalRequest:
+        approval.decision = decision
+        return approval
 
     def register_tool_execution(self, run_id: str, action: str) -> bool:
         key = (run_id, action)
