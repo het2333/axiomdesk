@@ -1,8 +1,8 @@
-# Independent AI Employee Runtime Design
+# AxiomDesk Runtime Design
 
 ## Goal
 
-Build an independently authored, China-ready B2B AI Employee runtime. The first release accepts normalized enterprise conversation events, retrieves tenant-scoped knowledge, pauses risky actions for approval, and resumes the same durable run after a decision.
+Build an independently authored, China-ready AxiomDesk runtime. The first release accepts normalized enterprise conversation events, retrieves tenant-scoped knowledge, pauses risky actions for approval, and resumes the same durable run after a decision.
 
 ## Scope
 

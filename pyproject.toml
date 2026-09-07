@@ -1,7 +1,7 @@
 [project]
-name = "etheralia-ai-employee"
+name = "axiomdesk"
 version = "0.1.0"
-description = "Independent B2B AI employee runtime"
+description = "Governed AI for B2B customer execution"
 readme = "README.md"
 license = { text = "Apache-2.0" }
 requires-python = ">=3.12"

@@ -1,6 +1,6 @@
-# Etheralia AI Employee
+# AxiomDesk
 
-An independently authored B2B AI employee runtime for enterprise conversations.
+Governed AI for B2B customer execution.
 
 The first release accepts normalized customer events, retrieves organization-scoped
 knowledge, requires approval for follow-up actions, and resumes the original

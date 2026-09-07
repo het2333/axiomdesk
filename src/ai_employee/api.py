@@ -42,7 +42,7 @@ def create_app(repository: InMemoryRepository | None = None) -> FastAPI:
     workflow = AgentWorkflow(active_repository)
     run_service = RunService(active_repository)
     approval_service = ApprovalService(active_repository, workflow)
-    app = FastAPI(title="Etheralia AI Employee")
+    app = FastAPI(title="AxiomDesk")
 
     @app.post(
         "/v1/conversation-events",

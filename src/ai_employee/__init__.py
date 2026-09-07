@@ -1,1 +1,1 @@
-"""Independent AI Employee runtime."""
+"""AxiomDesk runtime."""
