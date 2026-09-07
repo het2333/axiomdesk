@@ -36,3 +36,18 @@ def test_search_returns_empty_evidence_when_no_document_matches() -> None:
     )
 
     assert KnowledgeRetriever(repository).search("acme", "退款") == []
+
+
+def test_search_matches_a_chinese_question_with_a_relevant_phrase() -> None:
+    repository = InMemoryRepository()
+    repository.add_document(
+        KnowledgeDocument(
+            id="delivery-policy",
+            organization_id="acme",
+            content="标准交期为 7 天。",
+        )
+    )
+
+    evidence = KnowledgeRetriever(repository).search("acme", "交期多久")
+
+    assert [item.document_id for item in evidence] == ["delivery-policy"]
