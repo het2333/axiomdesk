@@ -2,6 +2,7 @@ from typing import TypedDict
 
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.graph import END, START, StateGraph
+from langgraph.graph.state import CompiledStateGraph
 from langgraph.types import Command, interrupt
 
 from ai_employee.contracts import ActionOutcome, AgentRun, ApprovalDecision, Evidence, RunStatus
@@ -43,7 +44,7 @@ class AgentWorkflow:
         )
         return self.repository.get_run(run.id)
 
-    def _build_graph(self):
+    def _build_graph(self) -> CompiledStateGraph[WorkflowState, None, WorkflowState, WorkflowState]:
         builder = StateGraph(WorkflowState)
         builder.add_node("retrieve", self._retrieve)
         builder.add_node("plan", self._plan)

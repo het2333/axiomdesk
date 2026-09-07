@@ -45,6 +45,12 @@ class InMemoryRepository:
     def get_run(self, run_id: str) -> AgentRun:
         return self._runs_by_id[run_id]
 
+    def run_for(self, organization_id: str, run_id: str) -> AgentRun:
+        run = self.get_run(run_id)
+        if run.organization_id != organization_id:
+            raise KeyError(run_id)
+        return run
+
     def set_run_status(self, run_id: str, status: RunStatus) -> AgentRun:
         run = self.get_run(run_id)
         run.status = status
