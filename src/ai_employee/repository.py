@@ -1,10 +1,11 @@
-from ai_employee.contracts import AgentRun, AuditEvent, ConversationEvent
+from ai_employee.contracts import AgentRun, AuditEvent, ConversationEvent, KnowledgeDocument
 
 
 class InMemoryRepository:
     def __init__(self) -> None:
         self._runs_by_event: dict[tuple[str, str], AgentRun] = {}
         self._runs_by_id: dict[str, AgentRun] = {}
+        self._documents_by_organization: dict[str, list[KnowledgeDocument]] = {}
         self.audit_events: list[AuditEvent] = []
 
     @property
@@ -24,3 +25,9 @@ class InMemoryRepository:
 
     def append_audit(self, audit_event: AuditEvent) -> None:
         self.audit_events.append(audit_event)
+
+    def add_document(self, document: KnowledgeDocument) -> None:
+        self._documents_by_organization.setdefault(document.organization_id, []).append(document)
+
+    def documents_for(self, organization_id: str) -> list[KnowledgeDocument]:
+        return self._documents_by_organization.get(organization_id, [])
