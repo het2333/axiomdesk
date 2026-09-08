@@ -88,6 +88,10 @@ Tenant boundary ──→ Knowledge retrieval ──→ Action plan
 
 ## 架构
 
+![AxiomDesk architecture](docs/architecture/axiomdesk-architecture.svg)
+
+[查看或编辑 draw.io 源图](docs/architecture/axiomdesk-architecture.drawio)。实线表示当前 Runtime 的核心边界；灰色虚线表示明确的生产扩展目标，尚未作为已上线能力发布。
+
 ```text
 Channel Adapter / REST API
             │
